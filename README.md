@@ -11,4 +11,4 @@ Get all the content, and dump in in your root folder, then add the following lin
 - Nice and pretty prompt (also show the current GIT branch of the current folder at the end of your prompt)
 - GIT completions (with tab) + git shortcuts (such as `git st`, `git co`, `gitlog`, ...)
 - Cool aliases (`ll`, `...`)
-- Cool scripts (try `myFind -h`, `myReplace -h`, `myCache -h`)
+- Cool scripts (try `myfind -h`, `myreplace -h`, `mycache -h`)
