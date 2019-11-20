@@ -1,0 +1,31 @@
+# FUNCTIONS FOR PROMPT
+PSC() { echo -ne "\[\033[${1:-0;38}m\]"; }
+GIT_BRANCH() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'; }
+PWD() { 
+    echo "$*" |perl -pne \
+    's:^'"$HOME"':~:;'"$cygpwd"'s:^(.{10}).{4}.*(.{20})$:$1...$2:;'
+}
+
+# PROMPT COLOR
+PR="0;32"
+if [ "$(id -u)" = 0 ]
+then
+    # root is red background 
+    sudo=41
+elif [ "$(id -un)" != "$(basename $HOME)" ]
+then 
+    # not root, not self: red text
+    sudo=31
+else 
+    # standard user color
+    sudo="$PR"
+fi
+
+# PROMPT TEXT
+alias PS1='export PS1="\u@\h \w\$(GIT_BRANCH)\$ "'
+PROMPT_COMMAND='[ $? = 0 ] && PS1=${PS1[1]} || PS1=${PS1[2]}'
+PSbase="$(PSC $sudo)\u$(PSC $PR)@\h $(PSC 33)\$(PWD \w) $(PSC 34)\$(GIT_BRANCH)"
+PS1[1]="$PSbase$(PSC $PR)\$ $(PSC)"
+PS1[2]="$PSbase$(PSC  31)\$ $(PSC)"
+PS1="$PSbase$(PSC $PR)\$ $(PSC) $(GIT_BRANCH)"
+unset sudo PR PSbase

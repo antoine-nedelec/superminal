@@ -1,0 +1,15 @@
+# INCLUDE
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
+[[ -s ~/.bashrc_superminal ]] && source ~/.bashrc_superminal
+
+# USEFUL ALIASES
+alias ll="ls -alh"
+alias ...="cd ../.."
+
+alias myfind="sh ~/scripts/myFind.sh"
+alias myreplace="sh ~/scripts/myReplace.sh"
+alias mycache="sh ~/scripts/myCache.sh"
+alias gitlog="git log --graph --decorate --pretty=oneline --abbrev-commit"
