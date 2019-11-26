@@ -6,7 +6,7 @@ fi
 [[ -s ~/.bashrc_superminal ]] && source ~/.bashrc_superminal
 
 # USEFUL ALIASES
-alias ll="ls -alh"
+alias ll="ls -alhG"
 alias ...="cd ../.."
 
 alias myfind="sh ~/scripts/myFind.sh"
