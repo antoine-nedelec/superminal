@@ -4,7 +4,7 @@ if [ "$1" = "-h" ]; then
 	echo "         **** REPLACE MANAGER *****";
 	echo "         **************************";
 	echo "";
-	echo "     Replace all occurence of [FOO] found by [BAR] for all the files in the current folder";
+	echo "     Replace all occurence of [FOO] found by [BAR] found inside all the files in the current folder";
 	echo "     -> NB: DO NOT FORGET TO ESCAPE QUOTES (' & \")";
 	echo "";
 	echo "     usage: 'myreplace FOO BAR'";
