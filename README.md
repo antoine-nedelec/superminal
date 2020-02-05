@@ -1,7 +1,7 @@
 # superminal
 Terminal customization
 
-Get all the content, and dump it in your root folder, then add the following line in your `.bash_profile` file:
+Clone all the content in your root folder, then add the following line in your `.bash_profile` file:
 
 ```
 [[ -s ~/superminal/.bash_init_superminal ]] && source ~/superminal/.bash_init_superminal
