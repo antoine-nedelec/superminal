@@ -49,4 +49,6 @@
         sort = version:refname
 [rerere]
         enabled = true
+[core]
+	pager = more
 
