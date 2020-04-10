@@ -13,7 +13,7 @@ PWD() {
 
 # _________________________________________________________________________________________
 # PROMPT COLOR INFO
-# BACKGROUND                                    COLOR (LEFT VALUE)      TYPE (RIGHT VALUE)
+# BACKGROUND                            COLOR (LEFT VALUE)              TYPE (RIGHT VALUE)
 # Black background: 40                  Black: 30                       Normal Text: 0
 # Blue background: 44                   Blue: 34                        Bold or Light Text: 1 (It depends on the terminal emulator.)
 # Cyan background: 46                   Cyan: 36                        Dim Text: 2
@@ -27,11 +27,11 @@ PWD() {
 # COLOR SYNTAX:         \[\033[LEFT_VALUE;RIGHT_VALUEm\] or \[\033[LEFT_VALUEm\]
 # _________________________________________________________________________________________
 
-TEXT_COLOR="\[\033[30m\]"
+TEXT_COLOR="\[\033[37m\]"
 PATH_COLOR="\[\033[33m\]"
 BASIC_COLOR="\[\033[0;32m\]"
 BASIC_COLOR="\[\033[0;32m\]"
-GIT_COLOR="\[\033[34m\]"
+GIT_COLOR="\[\033[31m\]"
 
 if [ "$(id -u)" = 0 ]
 then

@@ -10,8 +10,19 @@ alias ll="ls -alhG"
 alias ..="cd .."
 alias ...="cd ../.."
 
-
 alias myfind="sh ~/superminal/scripts/myFind.sh"
 alias myreplace="sh ~/superminal/scripts/myReplace.sh"
 alias mycache="sh ~/superminal/scripts/myCache.sh"
 alias gitlog="git log --graph --decorate --pretty=oneline --abbrev-commit"
+
+fdu() {
+    du -Hs "$1"
+}
+
+function cleanup_docker() {
+    docker stop $(docker ps -qa)
+    docker system prune -fa
+    docker rm $(docker ps -q -f status=exited)
+    docker volume rm $(docker volume ls -q)
+}
+
