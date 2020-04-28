@@ -2,14 +2,16 @@
 # FUNCTIONS FOR PROMPT
 GIT_BRANCH() {
     local TEMP=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/');
-    [ ! -z $TEMP ] && echo "${TEMP} "
+    [[ ! -z $TEMP ]] && echo "${TEMP}"
 }
 PWD() {
-        echo "$*" |perl -pne \
-        's:^'"$HOME"':~:;'"$cygpwd"'s:^(.{10}).{4}.*(.{20})$:$1...$2:;'
+    echo "$*" |perl -pne \
+    's:^'"$HOME"':~:;'"$cygpwd"'s:^(.{10}).{4}.*(.{20})$:$1...$2:;'
 }
-# _________________________________________________________________________________________
-
+PWD_LONG() {
+    echo "$*" |perl -pne \
+    's:^'"$HOME"':~:;'"$cygpwd"
+}
 
 # _________________________________________________________________________________________
 # PROMPT COLOR INFO
@@ -27,31 +29,38 @@ PWD() {
 # COLOR SYNTAX:         \[\033[LEFT_VALUE;RIGHT_VALUEm\] or \[\033[LEFT_VALUEm\]
 # _________________________________________________________________________________________
 
-TEXT_COLOR="\[\033[37m\]"
-PATH_COLOR="\[\033[33m\]"
-BASIC_COLOR="\[\033[0;32m\]"
-BASIC_COLOR="\[\033[0;32m\]"
-GIT_COLOR="\[\033[31m\]"
-
-if [ "$(id -u)" = 0 ]
+if [[ "$(id -u)" = 0 ]]
 then
     # root: red BG
-    USER_COLOR="\[\033[41m\]"
-elif [ "$(id -un)" != "$(basename $HOME)" ]
+    COLOR_PREFIX="\[\033[41;37m\]"
+elif [[ "$(id -un)" != "$(basename $HOME)" ]]
 then
     # not root, not self: red text
-    USER_COLOR="\[\033[31m\]"
+    COLOR_PREFIX="\[\033[31;m\]"
 else
     # user color
-        USER_COLOR="\[\033[0;32m\]"
+    COLOR_PREFIX="\[\033[;37m\]"
 fi
+
+COLOR_PATH="\[\033[40;32m\]"
+COLOR_GIT="\[\033[40;31;1m\]"
+COLOR_TEXT="\[\033[40;37;0m\]"
 
 # PROMPT TEXT
 PR_USER="\u"
 PR_HOST="\h"
-PR_DIR_PATH="\$(PWD \w)"
-PR_BRANCH="\$(GIT_BRANCH)"
-PR_END="■"
+PR_PREFIX=" [${PR_USER}:${PR_HOST}]"
 
-PS1="${USER_COLOR}[${PR_USER}:${PR_HOST}] ${PATH_COLOR}╚ ${PR_DIR_PATH} ╗ ${GIT_COLOR}${PR_BRANCH}${PR_END} ${TEXT_COLOR}"
+if [[ "$1" = "0" ]]
+then
+    PR_PATH=" ╚ \$(PWD \w) ╗"
+    PR_GIT=" \$(GIT_BRANCH)"
+else
+    PR_PATH=" ╚ \$(PWD_LONG \w) ╗"
+    PR_GIT=" \$(GIT_BRANCH)\n"
+fi
+
+PR_END=" ■ "
+
+PS1="\n${COLOR_PREFIX}${PR_PREFIX}${COLOR_PATH}${PR_PATH}${COLOR_GIT}${PR_GIT}${COLOR_TEXT}${PR_END}"
 unset USER_COLOR TEXT_COLOR PATH_COLOR BASIC_COLOR BASIC_COLOR GIT_COLOR PR_USER PR_HOST PR_DIR_PATH PR_BRANCH PR_END

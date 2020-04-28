@@ -38,7 +38,6 @@
         clog = log -g --grep-relog="checkout:" --oneline
         pdiff = diff -w --color-words
         pshow = show --color-words
-
 [merge]
         conflictStyle = diff3
 [color "branch"]
@@ -49,6 +48,3 @@
         sort = version:refname
 [rerere]
         enabled = true
-[core]
-	pager = more
-
