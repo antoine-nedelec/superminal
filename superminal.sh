@@ -2,7 +2,7 @@
 bashrc_format=1
 
 # INCLUDE
-[[ -s ~/superminal/.bashrc ]] && source ~/superminal/.bashrc $(bashrc_format)
+[[ -s ~/superminal/.bashrc ]] && source ~/superminal/.bashrc $bashrc_format
 [[ -s ~/superminal/.git-completion.bash ]] && source ~/superminal/.git-completion.bash
 
 # USEFUL ALIASES
